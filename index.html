@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- extra style --> 
+<style type="text/css">
+#container { margin-left: auto; margin-right: auto; width: 400px;}
+</style>
+</head>
+<body>
+<!-- where the content will go --> 
+<div id="container"></div>
+
+</body>
+<script>
+
+$.get('data.csv', function(data) {
+
+	// start the table	
+	var html = '<table class="table table-bordered">';
+
+	// split into lines
+	var rows = data.split("\n");
+
+	// parse lines
+	rows.forEach( function getvalues(ourrow) {
+
+		// start a table row
+		html += "<tr>";
+
+		// split line into columns
+		var columns = ourrow.split(",");
+		
+		html += "<td>" + columns[0] + "</td>";
+		html += "<td>" + columns[1] + "</td>";
+		html += "<td>" + columns[2] + "</td>";
+		
+		// close row
+		html += "</tr>";		
+	})
+	// close table
+	html += "</table>";
+
+	// insert into div
+	$('#container').append(html);
+	
+});
+</script>
+</html>
